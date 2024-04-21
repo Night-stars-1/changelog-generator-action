@@ -75,6 +75,7 @@ function overwriteChangelog(commits) {
         changelog += "## Other\n\n" + otherMessage.join('\n') + "\n\n";
     }
     changelog += "\n> Changelog generated through the projects' GitHub Actions.";
+    console.log(changelog)
     return changelog;
 }
 
