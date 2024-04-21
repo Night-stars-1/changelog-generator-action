@@ -6,7 +6,7 @@ outputs:
         description: "CHANGELOG"
 runs:
     using: 'node20'
-    main: 'changelog_generator.js'
+    main: 'dist/index.js'
 branding:
     icon: 'book'
     color: 'blue'
