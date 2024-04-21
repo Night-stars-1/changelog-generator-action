@@ -14,17 +14,17 @@
 
 ```yaml
 - name: Checkout
-uses: actions/checkout@v4.1.1
-with:
+  uses: actions/checkout@v4.1.1
+  with:
     fetch-depth: 1
     fetch-tags: true
 
 - name: test
-id: generate_changelog
-uses: Night-stars-1/changelog-generator-action@main
+  id: generate_changelog
+  uses: Night-stars-1/changelog-generator-action@main
 
 - name: Use the output
-run: |
+  run: |
     echo "Generated changelog:"
     echo "${{ steps.generate_changelog.outputs.changelog }}"
 ```
