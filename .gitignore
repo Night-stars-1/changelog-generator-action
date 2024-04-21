@@ -1,3 +1,1 @@
-*.swp
-*.vscode
-*.obj
+node_modules

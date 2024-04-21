@@ -1,3 +1,10 @@
+/*
+* Author: Night-stars-1 nujj1042633805@gmail.com
+* Date: 2024-04-21 15:11:24
+* LastEditTime: 2024-04-21 15:44:58
+* LastEditors: Night-stars-1 nujj1042633805@gmail.com
+ */
+const core = require('@actions/core');
 const { execSync } = require('child_process');
 
 function shell(command, sep = '\n') {
@@ -76,7 +83,7 @@ function main() {
     let commits = getCommitLog(previousTag, currentTag);
     commits = stripCommits(commits);
     const changelog = overwriteChangelog(commits);
-    console.log(`::set-output name=changelog::${changelog}`);
+    core.setOutput('changelog', changelog)
 }
 
 main();
