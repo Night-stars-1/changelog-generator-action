@@ -1,7 +1,7 @@
 /*
 * Author: Night-stars-1 nujj1042633805@gmail.com
 * Date: 2024-04-21 15:11:24
-* LastEditTime: 2024-04-21 15:44:58
+* LastEditTime: 2024-04-22 21:15:33
 * LastEditors: Night-stars-1 nujj1042633805@gmail.com
  */
 const core = require('@actions/core');
@@ -10,7 +10,7 @@ const { execSync } = require('child_process');
 function shell(command, sep = '\n') {
     try {
         const output = execSync(command).toString();
-        return output.split(sep);
+        return output.split(sep).filter(tag => tag.trim() !== '');
     } catch (error) {
         console.error('Shell command failed:', error);
         return [];
@@ -19,7 +19,9 @@ function shell(command, sep = '\n') {
 
 function getSectionTag() {
     const tags = shell("git tag --sort=-creatordate");
-    return { previousTag: tags[1], currentTag: tags[0] };
+    const filteredTags = tags.slice(1).filter(tag => !(tag.includes('beta') || tag.includes('alpha') || tag.includes('rc')));
+    console.log(`${filteredTags[1]}-${filteredTags[0]}`)
+    return { previousTag: filteredTags[1], currentTag: filteredTags[0] };
 }
 
 function getCommitLog(previousTag, currentTag) {
@@ -31,6 +33,7 @@ function getCommitLog(previousTag, currentTag) {
             const commitAuthor = parts[0];
             const commitMessage = parts[1];
             const commitHash = parts[2].replace(/\n/g, '');
+            if (commitMessage.startsWith("Merge pull request")) return
             commitMessage.split('\n').forEach(line2 => {
                 if (line2) {
                     message.push({
