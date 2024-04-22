@@ -26817,7 +26817,7 @@ var __webpack_exports__ = {};
 /*
 * Author: Night-stars-1 nujj1042633805@gmail.com
 * Date: 2024-04-21 15:11:24
-* LastEditTime: 2024-04-22 21:15:33
+* LastEditTime: 2024-04-22 21:41:37
 * LastEditors: Night-stars-1 nujj1042633805@gmail.com
  */
 const core = __nccwpck_require__(2186);
@@ -26878,7 +26878,7 @@ function overwriteChangelog(commits) {
             featMessage.push(`* ${commit.message} by @${commit.author} in ${commit.hash}`);
         } else if (/^fix/.test(commit.message)) {
             fixMessage.push(`* ${commit.message} by @${commit.author} in ${commit.hash}`);
-        } else if (/^(refactor|test|ci|chore)/.test(commit.message)) {
+        } else {
             otherMessage.push(`* ${commit.message} by @${commit.author} in ${commit.hash}`);
         }
     });
@@ -26901,7 +26901,7 @@ function overwriteChangelog(commits) {
 function main() {
     const { previousTag, currentTag } = getSectionTag();
     let commits = getCommitLog(previousTag, currentTag);
-    commits = stripCommits(commits);
+    //commits = stripCommits(commits);
     const changelog = overwriteChangelog(commits);
     core.setOutput('changelog', changelog)
 }
