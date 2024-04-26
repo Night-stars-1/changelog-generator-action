@@ -26817,7 +26817,7 @@ var __webpack_exports__ = {};
 /*
 * Author: Night-stars-1 nujj1042633805@gmail.com
 * Date: 2024-04-21 15:11:24
-* LastEditTime: 2024-04-22 21:41:37
+* LastEditTime: 2024-04-26 18:26:44
 * LastEditors: Night-stars-1 nujj1042633805@gmail.com
  */
 const core = __nccwpck_require__(2186);
@@ -26835,6 +26835,7 @@ function shell(command, sep = '\n') {
 
 function getSectionTag() {
     const tags = shell("git tag --sort=-creatordate");
+    console.log(tags)
     const filteredTags = tags.slice(1).filter(tag => !(tag.includes('beta') || tag.includes('alpha') || tag.includes('rc')));
     console.log(`${filteredTags[1]}-${filteredTags[0]}`)
     return { previousTag: filteredTags[1], currentTag: filteredTags[0] };
