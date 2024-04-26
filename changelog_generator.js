@@ -19,10 +19,9 @@ function shell(command, sep = '\n') {
 
 function getSectionTag() {
     const tags = shell("git tag --sort=-creatordate");
-    console.log(tags)
     const filteredTags = tags.slice(1).filter(tag => !(tag.includes('beta') || tag.includes('alpha') || tag.includes('rc')));
-    console.log(`${filteredTags[1]}-${filteredTags[0]}`)
-    return { previousTag: filteredTags[1], currentTag: filteredTags[0] };
+    console.log(`${filteredTags[1]}-${tags[0]}`)
+    return { previousTag: filteredTags[1], currentTag: tags[0] };
 }
 
 function getCommitLog(previousTag, currentTag) {
