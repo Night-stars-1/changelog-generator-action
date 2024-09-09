@@ -1,8 +1,8 @@
 /*
-* Author: Night-stars-1 nujj1042633805@gmail.com
-* Date: 2024-04-21 15:11:24
-* LastEditTime: 2024-04-26 18:26:44
-* LastEditors: Night-stars-1 nujj1042633805@gmail.com
+ * Author: Night-stars-1 nujj1042633805@gmail.com
+ * Date: 2024-04-21 15:11:24
+ *LastEditTime: 2024-09-09 23:17:55
+ *LastEditors: Night-stars-1 nujj1042633805@gmail.com
  */
 const core = require('@actions/core');
 const { execSync } = require('child_process');
@@ -18,11 +18,13 @@ function shell(command, sep = '\n') {
 }
 
 function getSectionTag() {
-    const tags = shell("git tag --sort=-creatordate");
-    const filteredTags = tags.slice(1).filter(tag => !(tag.includes('beta') || tag.includes('alpha') || tag.includes('rc')));
-    console.log(`${filteredTags[1]}-${tags[0]}`)
-    return { previousTag: filteredTags[1], currentTag: tags[0] };
-}
+    const tags = shell('git tag --sort=-creatordate')
+    const filteredTags = tags
+      .slice(1)
+      .filter((tag) => !(tag.includes('beta') || tag.includes('alpha') || tag.includes('rc')))
+    console.log(`${filteredTags}-${tags[0]}`)
+    return { previousTag: filteredTags[0], currentTag: tags[0] }
+  }
 
 function getCommitLog(previousTag, currentTag) {
     const output = shell(`git log ${previousTag}..${currentTag} --pretty=format:"|/|%an|-|%B|-|%h"`, '|/|');
